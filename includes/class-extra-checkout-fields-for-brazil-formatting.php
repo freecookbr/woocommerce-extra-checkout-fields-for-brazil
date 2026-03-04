@@ -72,3 +72,5 @@ class Extra_Checkout_Fields_For_Brazil_Formatting {
 		return true;
 	}
 }
+
+

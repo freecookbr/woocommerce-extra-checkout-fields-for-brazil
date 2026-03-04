@@ -307,3 +307,5 @@ class Extra_Checkout_Fields_For_Brazil_Order {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Order();
+
+

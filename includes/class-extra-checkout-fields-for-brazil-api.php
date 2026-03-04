@@ -338,3 +338,5 @@ class Extra_Checkout_Fields_For_Brazil_API {
 }
 
 new Extra_Checkout_Fields_For_Brazil_API();
+
+

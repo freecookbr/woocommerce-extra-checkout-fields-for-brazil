@@ -127,3 +127,5 @@ class Extra_Checkout_Fields_For_Brazil_Cnpj_Biz_Api {
 		return $data;
 	}
 }
+
+

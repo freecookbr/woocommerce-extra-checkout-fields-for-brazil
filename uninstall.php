@@ -12,3 +12,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 delete_option( 'wcbcf_settings' );
 delete_option( 'wcbcf_version' );
+
+

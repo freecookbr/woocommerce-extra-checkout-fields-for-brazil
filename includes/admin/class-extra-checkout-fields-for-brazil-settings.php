@@ -373,3 +373,5 @@ class Extra_Checkout_Fields_For_Brazil_Settings {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Settings();
+
+

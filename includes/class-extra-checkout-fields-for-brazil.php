@@ -40,6 +40,13 @@ class Extra_Checkout_Fields_For_Brazil {
 
 			if ( is_admin() ) {
 				$this->admin_includes();
+				// Remove update notifications and auto-update button
+				add_filter( 'site_transient_update_plugins', array( $this, 'remove_plugin_updates' ) );
+				add_filter( 'transient_update_plugins', array( $this, 'remove_plugin_updates' ) );
+				// Remove "Ver detalhes" link from plugin row
+				add_filter( 'plugin_row_meta', array( $this, 'remove_plugin_row_meta' ), 10, 2 );
+				// Remove "Ativar atualizações automáticas" button
+				add_filter( 'plugin_auto_update_setting_html', array( $this, 'remove_auto_update_html' ), 10, 2 );
 			}
 
 			$this->includes();
@@ -142,10 +149,57 @@ class Extra_Checkout_Fields_For_Brazil {
 	public function plugin_action_links( $links ) {
 		$plugin_links   = array();
 		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=woocommerce-extra-checkout-fields-for-brazil' ) ) . '">' . __( 'Settings', 'woocommerce-extra-checkout-fields-for-brazil' ) . '</a>';
-		$plugin_links[] = '<a href="https://apoia.se/claudiosanches?utm_source=plugin-bmw" target="_blank" rel="noopener noreferrer">' . __( 'Premium Support', 'woocommerce-extra-checkout-fields-for-brazil' ) . '</a>';
-		$plugin_links[] = '<a href="https://apoia.se/claudiosanches?utm_source=plugin-bmw" target="_blank" rel="noopener noreferrer">' . __( 'Contribute', 'woocommerce-extra-checkout-fields-for-brazil' ) . '</a>';
 
-		return array_merge( $plugin_links, $links );
+		// Remove "Ver detalhes" link that WordPress adds automatically
+		$filtered_links = array_filter( $links, function( $link ) {
+			return strpos( $link, 'plugin-information' ) === false && strpos( $link, 'Ver detalhes' ) === false;
+		});
+
+		return array_merge( $plugin_links, $filtered_links );
+	}
+
+	/**
+	 * Remove plugin updates to prevent WordPress from showing update notifications.
+	 *
+	 * @param  object $value Update object.
+	 *
+	 * @return object
+	 */
+	public function remove_plugin_updates( $value ) {
+		if ( isset( $value ) && is_object( $value ) ) {
+			unset( $value->response[ plugin_basename( CSBMW_PLUGIN_FILE ) ] );
+		}
+		return $value;
+	}
+
+	/**
+	 * Remove "Ver detalhes" link from plugin row meta.
+	 *
+	 * @param array  $links Row meta links.
+	 * @param string $file  Plugin file.
+	 *
+	 * @return array
+	 */
+	public function remove_plugin_row_meta( $links, $file ) {
+		if ( plugin_basename( CSBMW_PLUGIN_FILE ) === $file ) {
+			return array();
+		}
+		return $links;
+	}
+
+	/**
+	 * Remove "Ativar atualizações automáticas" button.
+	 *
+	 * @param string $html   HTML output.
+	 * @param string $plugin Plugin file.
+	 *
+	 * @return string
+	 */
+	public function remove_auto_update_html( $html, $plugin ) {
+		if ( plugin_basename( CSBMW_PLUGIN_FILE ) === $plugin ) {
+			return '';
+		}
+		return $html;
 	}
 
 	/**
@@ -155,8 +209,8 @@ class Extra_Checkout_Fields_For_Brazil {
 		echo '<div class="error"><p>' . wp_kses(
 			sprintf(
 				/* translators: %s: woocommerce link */
-				__( 'Brazilian Market on WooCommerce depends on %s to work!', 'woocommerce-extra-checkout-fields-for-brazil' ),
-				'<a href="http://wordpress.org/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-extra-checkout-fields-for-brazil' ) . '</a>'
+					__( 'Brazilian Market on WooCommerce depends on %s to work!', 'woocommerce-extra-checkout-fields-for-brazil' ),
+					'<a href="http://wordpress.org/plugins/woocommerce/">' . __( 'WooCommerce', 'woocommerce-extra-checkout-fields-for-brazil' ) . '</a>'
 			),
 			array(
 				'a' => array(
@@ -166,3 +220,5 @@ class Extra_Checkout_Fields_For_Brazil {
 		) . '</p></div>';
 	}
 }
+
+

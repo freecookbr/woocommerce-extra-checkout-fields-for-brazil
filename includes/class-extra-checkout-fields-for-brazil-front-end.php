@@ -203,7 +203,7 @@ class Extra_Checkout_Fields_For_Brazil_Front_End {
 					);
 				} else {
 					$new_fields['billing_cnpj'] = array(
-						'label'    => __( 'CNPJ', 'woocommerce-extra-checkout-fields-for-brazil' ),
+					'label'    => __( 'CNPJ', 'woocommerce-extra-checkout-fields-for-brazil' ),
 						'class'    => array( 'form-row-wide', 'person-type-field' ),
 						'required' => false,
 						'type'     => 'tel',
@@ -265,7 +265,7 @@ class Extra_Checkout_Fields_For_Brazil_Front_End {
 		}
 
 		$new_fields['billing_number'] = array(
-			'label'    => __( 'Number', 'woocommerce-extra-checkout-fields-for-brazil' ),
+				'label'    => __( 'Number', 'woocommerce-extra-checkout-fields-for-brazil' ),
 			'class'    => array( $first_class, 'address-field' ),
 			'clear'    => true,
 			'required' => true,
@@ -305,7 +305,7 @@ class Extra_Checkout_Fields_For_Brazil_Front_End {
 			}
 
 			$new_fields['billing_cellphone'] = array(
-				'label'    => __( 'Cell Phone', 'woocommerce-extra-checkout-fields-for-brazil' ),
+					'label'    => __( 'Cell Phone', 'woocommerce-extra-checkout-fields-for-brazil' ),
 				'type'     => 'tel',
 				'class'    => array( $last_class ),
 				'clear'    => true,
@@ -389,7 +389,7 @@ class Extra_Checkout_Fields_For_Brazil_Front_End {
 		}
 
 		$new_fields['shipping_number'] = array(
-			'label'    => __( 'Number', 'woocommerce-extra-checkout-fields-for-brazil' ),
+				'label'    => __( 'Number', 'woocommerce-extra-checkout-fields-for-brazil' ),
 			'class'    => array( $first_class, 'address-field' ),
 			'clear'    => true,
 			'required' => true,
@@ -604,3 +604,5 @@ class Extra_Checkout_Fields_For_Brazil_Front_End {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Front_End();
+
+

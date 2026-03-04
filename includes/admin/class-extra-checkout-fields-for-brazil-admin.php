@@ -146,3 +146,5 @@ class Extra_Checkout_Fields_For_Brazil_Admin {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Admin();
+
+

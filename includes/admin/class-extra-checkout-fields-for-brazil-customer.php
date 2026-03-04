@@ -170,3 +170,5 @@ class Extra_Checkout_Fields_For_Brazil_Customer {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Customer();
+
+

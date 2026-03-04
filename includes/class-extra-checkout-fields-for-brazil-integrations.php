@@ -139,3 +139,5 @@ class Extra_Checkout_Fields_For_Brazil_Integrations {
 }
 
 new Extra_Checkout_Fields_For_Brazil_Integrations();
+
+
