@@ -23,9 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				submit_button();
 			?>
 		</div>
-		<div class="box">
-			<?php require dirname( __FILE__ ) . '/html-admin-support.php'; ?>
-		</div>
 	</form>
 </div>
 
