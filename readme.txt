@@ -1,21 +1,43 @@
 === Brazilian Market on WooCommerce ===
 Contributors: claudiosanches
 Donate link: https://apoia.se/claudiosanches?utm_source=plugin-bmw
-Tags: woocommerce, checkout, brazil, cpf, cpnj
+Tags: woocommerce, checkout, brazil, cpf, cnpj, autofill, consulta cnpj
 Requires at least: 4.0
 Tested up to: 6.4
-Stable tag: 4.0.2
+Stable tag: 4.1.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds Brazilian checkout fields in WooCommerce
+Adds Brazilian checkout fields in WooCommerce with automatic CNPJ lookup and address autofill.
 
 == Description ==
 
 Adiciona novos campos para Pessoa Física ou Jurídica, Data de Nascimento, Gênero, Número, Bairro e Celular. Além de máscaras em campos e aviso de e-mail incorreto.
 
-Em breve serão integradas mais novidades para o mercado brasileiro, como poder fazer login por CPF/CNPJ, ocultar alguns campos no carrinho, aguardem!
+= Consulta e Preenchimento Automático de CNPJ =
+
+Este plugin conta com integração com a API pública [CNPJ.ws](https://cnpj.ws) para consulta automática de dados empresariais diretamente no checkout.
+
+Ao preencher o campo **CNPJ** e avançar para o próximo campo, o plugin realiza automaticamente uma consulta à API e preenche os seguintes campos do checkout sem necessidade de nenhum clique adicional:
+
+* **Razão Social** → Empresa
+* **Logradouro** (tipo + nome) → Endereço
+* **Número** → Número
+* **Complemento** → Complemento
+* **Bairro** → Bairro
+* **CEP** → CEP
+* **Cidade** → Cidade
+* **Estado** → Estado
+* **Telefone** (DDD + número) → Telefone
+* **E-mail** → E-mail
+* **Inscrição Estadual** (ativa) → Inscrição Estadual
+
+Os dados consultados são cacheados por 1 hora para evitar consultas repetidas à API. A consulta é feita de forma segura pelo servidor WordPress (proxy PHP), portanto o navegador do cliente nunca acessa a API diretamente — sem problemas de CORS ou exposição de credenciais.
+
+= Campos Brasileiros Extras =
+
+Adiciona novos campos para Pessoa Física ou Jurídica, Data de Nascimento, Gênero, Número, Bairro e Celular. Além de máscaras em campos e aviso de e-mail incorreto.
 
 É necessário estar utilizando uma versão do [WooCommerce](http://wordpress.org/extend/plugins/woocommerce/) para que o Brazilian Market on WooCommerce funcione.
 
@@ -37,10 +59,13 @@ Você pode esclarecer suas dúvidas usando:
 
 = Créditos =
 
+Plugin original criado por [Claudio Sanches](https://claudiosanches.com).
+
 Foram utilizados os seguintes scripts/serviços de terceiros:
 
 * [MailCheck jQuery](https://github.com/Kicksend/mailcheck).
 * [jQuery Mask Plugin](https://github.com/igorescobar/jQuery-Mask-Plugin).
+* [CNPJ.ws API Pública](https://cnpj.ws) — consulta de dados empresariais por CNPJ.
 
 = Colaborar =
 
@@ -65,6 +90,13 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 5. Sugestão de e-mail
 
 == Changelog ==
+
+= 4.1.0 - 2026/03/04 =
+
+- Adicionada integração com a API pública CNPJ.ws para consulta automática de dados empresariais.
+- Ao preencher o campo CNPJ no checkout e sair do campo, os dados da empresa são buscados automaticamente e os campos Razão Social, Endereço, Número, Complemento, Bairro, CEP, Cidade, Estado, Telefone, E-mail e Inscrição Estadual são preenchidos automaticamente.
+- Resultados da consulta são cacheados por 1 hora via WordPress transients para evitar consultas repetidas.
+- A consulta é realizada com segurança via proxy PHP no servidor, sem exposição do navegador à API externa.
 
 = 4.0.2 - 2024/02/17 =
 
@@ -157,6 +189,10 @@ Você pode contribuir com código-fonte em nossa página no [GitHub](https://git
 - Alterados os tipos dos campos cpf, cnpj para `tel` e e-mail para `email`. (Possível com a ajuda de [Thiago Guimarães](https://github.com/thiagogsr)).
 
 == Upgrade Notice ==
+
+= 4.1.0 =
+
+- Adicionada consulta e preenchimento automático de dados de CNPJ no checkout via API pública CNPJ.ws.
 
 = 4.0.0 =
 
